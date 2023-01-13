@@ -1,5 +1,4 @@
 // Load modules
-// const Employee = require("./lib/Employee")
 const Manager = require("./lib/Manager")
 const Engineer = require("./lib/Engineer")
 const Intern = require("./lib/Intern")
@@ -17,10 +16,25 @@ function buildTeam() {
     inquirer
     .prompt([
         {
-        type: "list",
-        message: "Select employee type:",
-        name: "empType",
-        choices: ["Manager", "Engineer", "Intern"],
+            type: "input",
+            message: "Name:",
+            name: "name"
+        },
+        {
+            type: "input",
+            message: "Employee ID:",
+            name: "id"
+        },
+        {
+            type: "input",
+            message: "Email address:",
+            name: "email"
+        },
+        {
+            type: "list",
+            message: "Select employee type:",
+            name: "empType",
+            choices: ["Manager", "Engineer", "Intern"],
         },
     ])
     .then(function (input) {
@@ -39,20 +53,80 @@ function buildTeam() {
 
 function manager() {
     console.log("a manager");
-    let manager = "manager"
-    employees.push(manager)
+
+    inquirer
+    .prompt([
+        {
+            type: "input",
+            message: "Office number:",
+            name: "office"
+        },
+    ])
+    .then(function (input) {
+        let manager = "manager"
+        employees.push(manager)
+        console.log(employees);
+        anotherOne()
+    });
 }
 
 function engineer() {
     console.log("an engineer");
-    let engineer = "engineer"
-    employees.push(engineer)
+
+    inquirer
+    .prompt([
+        {
+            type: "input",
+            message: "Github profile:",
+            name: "github"
+        },
+    ])
+    .then(function (input) {
+        let engineer = "engineer"
+        employees.push(engineer)
+        console.log(employees);
+        anotherOne()
+    });
 }
 
 function intern() {
     console.log("an intern");
-    let intern = "intern"
-    employees.push(intern)
+
+    inquirer
+    .prompt([
+        {
+            type: "input",
+            message: "School:",
+            name: "school"
+        },
+    ])
+    .then(function (input) {
+        let intern = "intern"
+        employees.push(intern)
+        console.log(employees);
+        anotherOne()
+    });
+}
+
+function anotherOne() {
+    inquirer
+    .prompt([
+        {
+            type: "list",
+            message: "Do you want to enter another employee?",
+            name: "another",
+            choices: ["yes", "no"]
+        },
+    ])
+    .then(function (input) {
+        // TODO
+        if (input.another == "yes") {
+            buildTeam()
+        } else {
+            console.log(employees);
+            console.log("thanks for playing");
+        }
+    }); 
 }
 
 buildTeam()
