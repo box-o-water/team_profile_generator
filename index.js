@@ -6,12 +6,12 @@ const Intern = require("./lib/Intern")
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-// const htmlwriter = require('./htmlwriter');
-// const writeHTML = require('./htmlwriter');
+const writeHTML = require('./htmlwriter');
 
 let employees = [];
 
-function buildTeam() {
+function manager() {
+    console.log("a manager");
 
     inquirer
     .prompt([
@@ -31,14 +31,33 @@ function buildTeam() {
             name: "email"
         },
         {
+            type: "input",
+            message: "Office number:",
+            name: "office"
+        },
+    ])
+    .then(function (userInput) {
+        let manager = new Manager(userInput.name, userInput.id, userInput.email, userInput.office);
+        employees.push(manager)
+        console.log(employees);
+        team()
+    });
+}
+
+function team() {
+
+    inquirer
+    .prompt([
+        {
             type: "list",
             message: "Select employee type:",
             name: "empType",
-            choices: ["Manager", "Engineer", "Intern"],
+            choices: ["Engineer", "Intern"],
+            default: "Engineer"
         },
     ])
-    .then(function (input) {
-        switch(input.empType) {
+    .then(function (userInput) {
+        switch(userInput.empType) {
             case "Manager":
                 manager();
                 break;
@@ -51,25 +70,6 @@ function buildTeam() {
     });
 }
 
-function manager() {
-    console.log("a manager");
-
-    inquirer
-    .prompt([
-        {
-            type: "input",
-            message: "Office number:",
-            name: "office"
-        },
-    ])
-    .then(function (input) {
-        let manager = "manager"
-        employees.push(manager)
-        console.log(employees);
-        anotherOne()
-    });
-}
-
 function engineer() {
     console.log("an engineer");
 
@@ -77,12 +77,27 @@ function engineer() {
     .prompt([
         {
             type: "input",
+            message: "Name:",
+            name: "name"
+        },
+        {
+            type: "input",
+            message: "Employee ID:",
+            name: "id"
+        },
+        {
+            type: "input",
+            message: "Email address:",
+            name: "email"
+        },
+        {
+            type: "input",
             message: "Github profile:",
             name: "github"
         },
     ])
-    .then(function (input) {
-        let engineer = "engineer"
+    .then(function (userInput) {
+        let engineer = new Engineer(userInput.name, userInput.id, userInput.email, userInput.github);
         employees.push(engineer)
         console.log(employees);
         anotherOne()
@@ -96,12 +111,27 @@ function intern() {
     .prompt([
         {
             type: "input",
+            message: "Name:",
+            name: "name"
+        },
+        {
+            type: "input",
+            message: "Employee ID:",
+            name: "id"
+        },
+        {
+            type: "input",
+            message: "Email address:",
+            name: "email"
+        },
+        {
+            type: "input",
             message: "School:",
             name: "school"
         },
     ])
-    .then(function (input) {
-        let intern = "intern"
+    .then(function (userInput) {
+        let intern = new Intern(userInput.name, userInput.id, userInput.email, userInput.school);
         employees.push(intern)
         console.log(employees);
         anotherOne()
@@ -118,52 +148,24 @@ function anotherOne() {
             choices: ["yes", "no"]
         },
     ])
-    .then(function (input) {
-        // TODO
-        if (input.another == "yes") {
-            buildTeam()
+    .then(function (userInput) {
+        if (userInput.another == "yes") {
+            team()
         } else {
             console.log(employees);
             console.log("thanks for playing");
+            createHTML(employees);
         }
     }); 
 }
 
-buildTeam()
+function createHTML() {
 
+    const filename = `dist/index.html`;
 
-        // fs.writeFile(filename, writeHTML(data), (err) =>
-        // err ? console.log(err) : console.log('Success!')
-        // );
-    // });
-        // {
-        // type: 'input',
-        // message: 'Employee ID.',
-        // name: 'title'
-        // },
-        // {
-        //     type: 'input',
-        //     message: 'Email address.',
-        //     name: 'email'
-        // },
-        // {
-        //     type: 'input',
-        //     message: 'Office number.',
-        //     name: 'office'
-        // },
-        // {
-        //     type: 'list',
-        //     message: 'Employee type.',
-        //     choices: ["engineer", "intern"],
-        //     name: 'type'
-        // },
+    fs.writeFile(filename, writeHTML(employees), (err) =>
+        err ? console.log(err) : console.log('Success!')
+    );
+};
 
-// allthethings.push(data)
-// console.log(JSON.stringify(allthethings))
-// const filename = `dist/index.json`;
-
-// // instead of writing it to a json file, write it to html
-// // const filename = `dist/index.html`;
-
-// fs.writeFile(filename, JSON.stringify(allthethings, null, '\t'), (err) =>
-// err ? console.log(err) : console.log('Success!')
+manager()
