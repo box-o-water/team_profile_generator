@@ -21,21 +21,24 @@ function manager() {
             name: "name",
             default: "Sue" // remove when ready
         },
-        // {
-        //     type: "input",
-        //     message: "Employee ID:",
-        //     name: "id"
-        // },
-        // {
-        //     type: "input",
-        //     message: "Email address:",
-        //     name: "email"
-        // },
-        // {
-        //     type: "input",
-        //     message: "Office number:",
-        //     name: "office"
-        // },
+        {
+            type: "input",
+            message: "Employee ID:",
+            name: "id",
+            default: 1 // remove when ready
+        },
+        {
+            type: "input",
+            message: "Email address:",
+            name: "email",
+            default: "sue@work.com" // remove when ready
+        },
+        {
+            type: "input",
+            message: "Office number:",
+            name: "office",
+            default: "1a" // remove when ready
+        },
     ])
     .then(function (userInput) {
         let manager = new Manager(userInput.name, userInput.id, userInput.email, userInput.office);
@@ -82,21 +85,21 @@ function engineer() {
             name: "name",
             default: "Bob" // remove when ready
         },
-        // {
-        //     type: "input",
-        //     message: "Employee ID:",
-        //     name: "id"
-        // },
-        // {
-        //     type: "input",
-        //     message: "Email address:",
-        //     name: "email"
-        // },
-        // {
-        //     type: "input",
-        //     message: "Github profile:",
-        //     name: "github"
-        // },
+        {
+            type: "input",
+            message: "Employee ID:",
+            name: "id"
+        },
+        {
+            type: "input",
+            message: "Email address:",
+            name: "email"
+        },
+        {
+            type: "input",
+            message: "Github profile:",
+            name: "github"
+        },
     ])
     .then(function (userInput) {
         let engineer = new Engineer(userInput.name, userInput.id, userInput.email, userInput.github);
@@ -116,21 +119,21 @@ function intern() {
             message: "Name:",
             name: "name"
         },
-        // {
-        //     type: "input",
-        //     message: "Employee ID:",
-        //     name: "id"
-        // },
-        // {
-        //     type: "input",
-        //     message: "Email address:",
-        //     name: "email"
-        // },
-        // {
-        //     type: "input",
-        //     message: "School:",
-        //     name: "school"
-        // },
+        {
+            type: "input",
+            message: "Employee ID:",
+            name: "id"
+        },
+        {
+            type: "input",
+            message: "Email address:",
+            name: "email"
+        },
+        {
+            type: "input",
+            message: "School:",
+            name: "school"
+        },
     ])
     .then(function (userInput) {
         let intern = new Intern(userInput.name, userInput.id, userInput.email, userInput.school);
