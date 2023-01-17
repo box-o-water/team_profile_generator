@@ -6,7 +6,7 @@ const Intern = require("./lib/Intern")
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-const writeHTML = require('./htmlwriter');
+const makeThing = require('./htmlwriter');
 
 let employees = [];
 
@@ -18,23 +18,24 @@ function manager() {
         {
             type: "input",
             message: "Name:",
-            name: "name"
+            name: "name",
+            default: "Sue" // remove when ready
         },
-        {
-            type: "input",
-            message: "Employee ID:",
-            name: "id"
-        },
-        {
-            type: "input",
-            message: "Email address:",
-            name: "email"
-        },
-        {
-            type: "input",
-            message: "Office number:",
-            name: "office"
-        },
+        // {
+        //     type: "input",
+        //     message: "Employee ID:",
+        //     name: "id"
+        // },
+        // {
+        //     type: "input",
+        //     message: "Email address:",
+        //     name: "email"
+        // },
+        // {
+        //     type: "input",
+        //     message: "Office number:",
+        //     name: "office"
+        // },
     ])
     .then(function (userInput) {
         let manager = new Manager(userInput.name, userInput.id, userInput.email, userInput.office);
@@ -78,23 +79,24 @@ function engineer() {
         {
             type: "input",
             message: "Name:",
-            name: "name"
+            name: "name",
+            default: "Bob" // remove when ready
         },
-        {
-            type: "input",
-            message: "Employee ID:",
-            name: "id"
-        },
-        {
-            type: "input",
-            message: "Email address:",
-            name: "email"
-        },
-        {
-            type: "input",
-            message: "Github profile:",
-            name: "github"
-        },
+        // {
+        //     type: "input",
+        //     message: "Employee ID:",
+        //     name: "id"
+        // },
+        // {
+        //     type: "input",
+        //     message: "Email address:",
+        //     name: "email"
+        // },
+        // {
+        //     type: "input",
+        //     message: "Github profile:",
+        //     name: "github"
+        // },
     ])
     .then(function (userInput) {
         let engineer = new Engineer(userInput.name, userInput.id, userInput.email, userInput.github);
@@ -114,21 +116,21 @@ function intern() {
             message: "Name:",
             name: "name"
         },
-        {
-            type: "input",
-            message: "Employee ID:",
-            name: "id"
-        },
-        {
-            type: "input",
-            message: "Email address:",
-            name: "email"
-        },
-        {
-            type: "input",
-            message: "School:",
-            name: "school"
-        },
+        // {
+        //     type: "input",
+        //     message: "Employee ID:",
+        //     name: "id"
+        // },
+        // {
+        //     type: "input",
+        //     message: "Email address:",
+        //     name: "email"
+        // },
+        // {
+        //     type: "input",
+        //     message: "School:",
+        //     name: "school"
+        // },
     ])
     .then(function (userInput) {
         let intern = new Intern(userInput.name, userInput.id, userInput.email, userInput.school);
@@ -145,7 +147,8 @@ function anotherOne() {
             type: "list",
             message: "Do you want to enter another employee?",
             name: "another",
-            choices: ["yes", "no"]
+            choices: ["yes", "no"],
+            default: "no" // remove when ready
         },
     ])
     .then(function (userInput) {
@@ -163,9 +166,10 @@ function createHTML() {
 
     const filename = `dist/index.html`;
 
-    fs.writeFile(filename, writeHTML(employees), (err) =>
+    fs.writeFile(filename, makeThing(employees), (err) =>
         err ? console.log(err) : console.log('Success!')
     );
+
 };
 
 manager()

@@ -1,22 +1,25 @@
-const writeHTML = manager => {
+const yippie = [];
 
-return`<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team Profile</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
-</head>
-<body>
-    <div class="content">
-        <ul class="manager" id="manager">
-            <li>Name: ${manager.getName()}</li>
-        </ul>
-    </div>
-</body>
-</html>`
-}
+// Control the employee order in the array by pushing the manager first, then the engineers, then the interns.
+const populateYippie = blah => {
+    yippie.push(
+        blah
+        .filter(seriously => seriously.getRole() === "Manager")
+    );
+    
+    yippie.push(
+        blah
+        .filter(seriously => seriously.getRole() === "Engineer")
+    );
 
-module.exports = writeHTML;
+    yippie.push(
+        blah
+        .filter(seriously => seriously.getRole() === "Intern")
+    );
+    
+    // return a string object with no spaces, as html ignores spacing between elements
+    console.log(yippie);
+    return yippie.join("");  
+};
+
+module.exports = populateYippie;
