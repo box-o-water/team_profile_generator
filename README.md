@@ -11,7 +11,9 @@ A Node.js command-line application that takes in information about employees on 
 
 ![preview](/images/team_profile_generator_preview.png)
 
-Click [here TODO](https://watch.screencastify.com/) to watch a video demonstrating the team_profile_generator.
+Click [here](https://watch.screencastify.com/v/hzPe8eBAt31ULsLYvCgK) to watch a video demonstrating the team_profile_generator.
+
+Click [here](/dist/index.html) to see the exact `index.html` file rendered in the video.
 
 ## Table of Contents
 
